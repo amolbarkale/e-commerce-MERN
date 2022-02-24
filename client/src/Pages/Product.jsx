@@ -2,12 +2,16 @@ import styled from "styled-components";
 import Navbar from "../Components/Navbar";
 import Announcement from "../Components/Announcement";
 import NewsLetter from "../Components/NewsLetter";
+import Footer from "../Components/Footer";
+
 import { Add, Remove } from "@material-ui/icons";
+import { Mobile } from "../responsive";
 
 const Component = styled.div``;
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  ${Mobile({ padding: "10px", flexDirection: "column" })}
 `;
 const ImgContainer = styled.div`
   flex: 1;
@@ -17,6 +21,7 @@ const Img = styled.img`
   width: 100%;
   height: 90vh;
   object-fit: cover;
+  ${Mobile({ height: "40vh" })}
 `;
 
 const InfoContainer = styled.div`
@@ -41,6 +46,7 @@ const FilterContainer = styled.div`
   margin: 30px 0;
   display: flex;
   justify-content: space-between;
+  ${Mobile({ width: "100%" })}
 `;
 
 const Filter = styled.div`
@@ -74,6 +80,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${Mobile({ width: "100%" })}
 `;
 
 const AmountContainer = styled.div`
@@ -153,6 +160,7 @@ const Product = () => {
         </InfoContainer>
       </Wrapper>
       <NewsLetter />
+      <Footer />
     </Component>
   );
 };

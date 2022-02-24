@@ -11,9 +11,11 @@ const Container = styled.div`
 `;
 
 const Products = () => {
+  console.log("popularProduct:", popularProduct);
+
   return (
     <Container>
-      {popularProduct.map((itm) => (
+      {popularProduct?.map((itm) => (
         <Product itm={itm} key={itm.id}></Product>
       ))}
     </Container>

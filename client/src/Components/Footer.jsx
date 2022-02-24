@@ -8,9 +8,11 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { Mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${Mobile({ flexDirection: "column" })}
 `;
 const Left = styled.div`
   flex: 1;
@@ -19,17 +21,20 @@ const Left = styled.div`
   padding: 20px;
 `;
 const Center = styled.div`
-  padding: 20px;
   flex: 1;
+  padding: 20px;
+  ${Mobile({ display: "none" })}
 `;
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${Mobile({ background: "#fff8f8", padding: "0px" })}
 `;
 const Logo = styled.h1``;
 
 const Desc = styled.p`
   margin: 20px 0;
+  ${Mobile({ textAlign: "center" })}
 `;
 
 const SocialContainer = styled.div`

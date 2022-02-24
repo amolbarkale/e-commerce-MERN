@@ -5,11 +5,13 @@ import Announcement from "../Components/Announcement";
 import NewsLetter from "../Components/NewsLetter";
 import Footer from "../Components/Footer";
 import Products from "../Components/Products";
+import { Mobile } from "../responsive";
 
 const Container = styled.div``;
 
 const Title = styled.h1`
   margin: 20px;
+  ${Mobile({ fontSize: "18px" })}
 `;
 
 const FilterContainer = styled.div`
@@ -18,17 +20,20 @@ const FilterContainer = styled.div`
 `;
 const Filter = styled.div`
   margin: 20px;
+  ${Mobile({ margin: "0 20px", display: "flex", flexDirection: "column" })}
 `;
 
 const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600px;
   margin-right: 20px;
+  ${Mobile({ margin: "0", fontSize: "14px" })}
 `;
 
 const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
+  ${Mobile({ margin: "10px 0" })}
 `;
 
 const Option = styled.option``;

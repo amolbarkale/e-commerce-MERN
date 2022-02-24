@@ -61,9 +61,10 @@ const Icon = styled.div`
 `;
 
 const Product = ({ itm }) => {
+  console.log("itm:", itm);
   return (
     <Container>
-      <Image src={itm.img} />
+      <Image src={itm?.img} />
       <Info>
         <Icon>
           <ShoppingCartOutlined />
