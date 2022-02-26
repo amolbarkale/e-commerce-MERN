@@ -1,0 +1,53 @@
+.widgetlg {
+  flex: 2;
+  padding: 20px;
+
+  -webkit-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  -moz-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+}
+.widgetLgTitle {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.widgetlgBtn {
+  padding: 5px 7px;
+  border: none;
+  border-radius: 10px;
+}
+.widgetlgBtn.Approved {
+  background: #d3f8ea;
+  color: #58b18f;
+}
+.widgetlgBtn.Declined {
+  background: #f1cfd2;
+  color: #af5f66;
+}
+.widgetlgBtn.Pending {
+  background: #cedbf7;
+  color: #6984bd;
+}
+.widgetLgTable {
+  width: 100%;
+  border-spacing: 20px;
+}
+.widgetlgTh {
+  text-align: center;
+}
+.widgetlgDate,
+.widgetlgAmount {
+  font-weight: 300;
+}
+.widgetlgImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.widgetlgUser {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}

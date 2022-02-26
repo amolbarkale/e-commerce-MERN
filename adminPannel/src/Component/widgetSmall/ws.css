@@ -1,0 +1,52 @@
+.widgetsm {
+  flex: 1px;
+  padding: 20px;
+  margin-right: 20px;
+  -webkit-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  -moz-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+}
+.widgetSmTitle {
+  font-size: 22px;
+  font-weight: 600;
+}
+.widgetSmImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.sidgetSmList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.widgetSmListItm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+.widgetSmUser {
+  display: flex;
+  flex-direction: column;
+}
+.widgetUsername {
+  font-weight: 600;
+}
+.widgetJobTitle {
+  font-weight: 300;
+}
+.widgetBtn {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 10px;
+  background: #eeeef7;
+  color: #555;
+  cursor: pointer;
+}
+.widgetVisi {
+  font-size: 36px;
+  margin-right: 5px;
+}
