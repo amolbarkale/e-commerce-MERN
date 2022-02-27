@@ -1,3 +1,110 @@
 .product {
   flex: 4;
+  padding: 20px;
+}
+.prodTitleCont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.prodAddBtn {
+  width: 80px;
+  border: none;
+  color: white;
+  background-color: teal;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.productTop {
+  display: flex;
+}
+.prodTopLeft,
+.prodTopRight {
+  flex: 1;
+}
+.prodTopRight {
+  -webkit-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  -moz-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  padding: 20px;
+  margin: 20px;
+}
+.prodInfoImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.prodInfoTop {
+  display: flex;
+  align-items: center;
+}
+.prodName {
+  font-weight: 600;
+}
+.prodInfoBottom {
+  margin-top: 10px;
+}
+.prodInfoItem {
+  width: 150px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.prodInfoItmValue {
+  font-weight: 300;
+}
+.productBottom {
+  -webkit-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  -moz-box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  box-shadow: 10px 14px 5px -7px rgba(207, 201, 207, 1);
+  padding: 20px;
+  margin: 20px;
+}
+.prodForm {
+  display: flex;
+  justify-content: space-between;
+}
+.prodFormLeft {
+  display: flex;
+  flex-direction: column;
+}
+.prodFormLeft > label {
+  margin-bottom: 10px;
+  color: grey;
+}
+.prodFormLeft > input {
+  margin-bottom: 10px;
+  border: none;
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+.prodFormLeft > select {
+  margin-bottom: 10px;
+}
+.prodUploadImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+.prodFormRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.prodUpload {
+  display: flex;
+  align-items: center;
+}
+.prodButton {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: darkblue;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 }
