@@ -76,6 +76,8 @@ const Btn = styled.button`
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  /* border: 1px solid #2874f0; */
+  /* box-shadow: #0c0c0c 0px 2px 2px 0px; */
 `;
 
 const Slider = () => {

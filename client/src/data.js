@@ -39,18 +39,21 @@ export const sliderItem = [
 export const CategoriesData = [
   {
     id: 1,
-    img: "https://i.insider.com/5fa57a33f7d1cb0019e3a392?width=700",
+    img: "https://assets.ajio.com/medias/sys_master/root/20210403/OjjF/6068dc44aeb269a9e33a52ba/-288Wx360H-462103975-pink-MODEL.jpg",
     title: "SHIRT STYLE",
+    category: "men",
   },
   {
     id: 2,
-    img: "https://manofmany.com/wp-content/uploads/2021/04/best-bomber-jackets-for-men-1200x800.jpg",
+    img: "https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1615301088-1317911_ou_2000_q80.jpg",
     title: "LOUNGWEAR LOVE",
+    category: "women",
   },
   {
     id: 3,
-    img: "https://www.indianq.com/wp-content/uploads/2020/02/Trendy-Mufti-Branded-Shirts-For-Men-Yellow.jpg",
+    img: "https://manofmany.com/wp-content/uploads/2021/04/best-bomber-jackets-for-men-1200x800.jpg",
     title: "LIGHT JACKETS",
+    category: "jacket",
   },
 ];
 

@@ -4,7 +4,14 @@ import Footer from "../Components/Footer";
 import styled from "styled-components";
 import { Add, Remove } from "@material-ui/icons";
 import { Mobile } from "../responsive";
+import { useSelector } from "react-redux";
+import StripeCheckout from "react-stripe-checkout";
+import { useEffect, useState } from "react";
+import { userRequest } from "../../src/reqMethods";
+import { useHistory } from "react-router-dom";
 
+const KEY =
+  "pk_test_51KWnEPSBqBQVzHg2E3a27gttWv8j9ztB6yJTQU4pJUQgT0f4CLvfUgGgBT3oFoaWY8pm4wpiMQAmpfrOmLMbzV5y00H4X1zRpg";
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 20px;
@@ -132,6 +139,33 @@ const Btn = styled.button`
 `;
 
 const Cart = () => {
+  const cart = useSelector((state) => state.cart);
+  console.log("cart:", cart.total);
+
+  const [stripeToken, setStripeToken] = useState(null);
+
+  const history = useHistory();
+  const onToken = (token) => {
+    setStripeToken(token);
+  };
+
+  useEffect(() => {
+    const makeReq = async () => {
+      try {
+        const res = await userRequest.post("/checkout/payment", {
+          tokenId: stripeToken.id,
+          amount: cart.total * 100,
+        });
+        console.log("res:", res);
+
+        history.push("/success", { data: res.data });
+      } catch (err) {
+        console.log("err:", err);
+      }
+    };
+    stripeToken && cart.total >= 1 && makeReq();
+  }, [stripeToken, cart.total, history]);
+
   return (
     <Container>
       <Navbar />
@@ -149,79 +183,71 @@ const Cart = () => {
 
         <Bottom>
           <Info>
-            <Product>
-              <ProdDetails>
-                <Image src="https://cdn.shopclues.com/images/thumbnails/21586/640/1/80147434bg114323803381436344627.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Pure synthetic premium Bag
-                  </ProductName>
-                  <ProductId>
-                    <b>Id:</b> 86260
-                  </ProductId>
+            {cart.products.map((product) => (
+              <>
+                <Product>
+                  <ProdDetails>
+                    <Image src={product.img} />
+                    <Details>
+                      <ProductName>
+                        <b>Product: </b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>Id: </b> {product._id}
+                      </ProductId>
 
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProdDetails>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
-            <Hr />
-            <Product>
-              <ProdDetails>
-                <Image src="https://cdn.shopclues.com/images/thumbnails/21586/640/1/80147434bg114323803381436344627.jpg" />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Pure synthetic premium Bag
-                  </ProductName>
-                  <ProductId>
-                    <b>Id:</b> 86260
-                  </ProductId>
-
-                  <ProductColor color="black" />
-                  <ProductSize>
-                    <b>Size:</b> 37.5
-                  </ProductSize>
-                </Details>
-              </ProdDetails>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <Add />
-                  <ProductAmount>2</ProductAmount>
-                  <Remove />
-                </ProductAmountContainer>
-                <ProductPrice>$ 30</ProductPrice>
-              </PriceDetail>
-            </Product>
+                      <ProductColor color={product.color} />
+                      <ProductSize>
+                        <b>Size: </b>
+                        {product.size}
+                      </ProductSize>
+                    </Details>
+                  </ProdDetails>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Add />
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Remove />
+                    </ProductAmountContainer>
+                    <ProductPrice>
+                      ₹ {product.price * product.quantity}
+                    </ProductPrice>
+                  </PriceDetail>
+                </Product>
+                <Hr />
+              </>
+            ))}
           </Info>
           <Summery>
             <SummeryTitle>ORDER SUMMERY</SummeryTitle>
             <SummeryItem>
               <SummeryItemText>Subtotal</SummeryItemText>
-              <SummeryItemText> $ 80</SummeryItemText>
+              <SummeryItemText> ₹ {cart.total}</SummeryItemText>
             </SummeryItem>
             <SummeryItem>
               <SummeryItemText>ESTIMATED SHIPPING</SummeryItemText>
-              <SummeryItemPrice> $ 5.90</SummeryItemPrice>
+              <SummeryItemPrice> ₹ 5.90</SummeryItemPrice>
             </SummeryItem>
             <SummeryItem>
               <SummeryItemText>SHIPPING DISCOUNT</SummeryItemText>
-              <SummeryItemPrice> $ 5.90</SummeryItemPrice>
+              <SummeryItemPrice> ₹ -5.90</SummeryItemPrice>
             </SummeryItem>
             <SummeryItem type="total">
               <SummeryItemText>Total</SummeryItemText>
-              <SummeryItemPrice> $ 80</SummeryItemPrice>
+              <SummeryItemPrice> ₹ {cart.total}</SummeryItemPrice>
             </SummeryItem>
-            <Btn>CHECKOUT NOW</Btn>
+            <StripeCheckout
+              name="e-shop"
+              image="https://scalebranding.com/wp-content/uploads/2020/10/EShop.jpg"
+              billingAddress
+              shippingAddress
+              description="your total is ₹ 520"
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Btn>CHECKOUT NOW</Btn>
+            </StripeCheckout>
           </Summery>
         </Bottom>
       </Wrapper>

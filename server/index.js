@@ -7,13 +7,16 @@ const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const cartRouter = require("./routes/cart");
 const orderRouter = require("./routes/oreder");
-dotenv.config();
+const stripeRouter = require("./routes/stripe");
 
+const cors = require("cors");
+dotenv.config();
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("DB conntected successfully"))
   .catch((err) => console.log("err", err));
 
+app.use(cors());
 app.use(express.json());
 
 app.use("/users", userRouter);
@@ -21,6 +24,7 @@ app.use("/auth", authRouter);
 app.use("/prods", productRouter);
 app.use("/carts", cartRouter);
 app.use("/orders", orderRouter);
+app.use("/checkout", stripeRouter);
 
 app.listen(process.env.PORT || 5000, () => {
   console.log("DB is litening to 5000");
