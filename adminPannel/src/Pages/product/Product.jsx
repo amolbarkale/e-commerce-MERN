@@ -4,13 +4,55 @@ import Chart from "../../Component/chart/Chart";
 import { prodData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
+import { useMemo, useState, useEffect } from "react";
+import { userRequest } from "../../reqMethods";
+
 const Product = () => {
   const location = useLocation();
+
   const prodId = location.pathname.split("/")[2];
+  console.log("prodId:", prodId);
+
+  const [pstats, setPstats] = useState([]);
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === prodId)
   );
+
+  const MONTHS = useMemo(
+    () => [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    []
+  );
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get("/orders/income?pid=" + prodId);
+
+        res.data.map((itm) =>
+          setPstats((prev) => [
+            ...prev,
+            { name: MONTHS[itm._id - 1], Sales: itm.total },
+          ])
+        );
+      } catch (err) {
+        console.log("err:", err);
+      }
+    };
+    getStats();
+  }, [MONTHS, prodId]);
 
   return (
     <div className="product">
@@ -22,7 +64,7 @@ const Product = () => {
       </div>
       <div className="productTop">
         <div className="prodTopLeft">
-          <Chart data={prodData} dataKey="sales" title="Sales performance" />
+          <Chart data={pstats} dataKey="Sales" title="Sales performance" />
         </div>
         <div className="prodTopRight">
           <div className="prodInfoTop">
