@@ -1,19 +1,26 @@
 import "./prodList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { prodRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, getProducts } from "../../redux/apiCall";
 
 const ProdList = () => {
-  const [data, setData] = useState(prodRows);
+  const dispatch = useDispatch();
+
+  const prods = useSelector((state) => state.product.products);
+
+  useEffect(() => {
+    getProducts(dispatch);
+  }, [dispatch]);
 
   const handleDalate = (id) => {
-    setData(data.filter((itm) => itm.id !== id));
+    deleteProduct(id, dispatch);
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 90 },
+    { field: "_id", headerName: "ID", width: 220 },
     {
       field: "product",
       headerName: "Product",
@@ -22,17 +29,13 @@ const ProdList = () => {
         return (
           <div className="ProductListItm">
             <img className="ProductListImg" src={params.row.img} alt="" />
-            {params.row.name}
+            {params.row.title}
           </div>
         );
       },
     },
-    { field: "stock", headerName: "Stock", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
+    { field: "inStock", headerName: "Stock", width: 200 },
+
     {
       field: "price",
       headerName: "Price",
@@ -45,12 +48,12 @@ const ProdList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/product/" + params.row.id}>
+            <Link to={"/product/" + params.row._id}>
               <button className="productListEdit">Edit</button>;
             </Link>
             <DeleteOutline
               className="productLisDelete"
-              onClick={() => handleDalate(params.row.id)}
+              onClick={() => handleDalate(params.row._id)}
             />
           </>
         );
@@ -61,8 +64,9 @@ const ProdList = () => {
   return (
     <div className="prodList">
       <DataGrid
-        rows={data}
+        rows={prods}
         columns={columns}
+        getRowId={(row) => row._id}
         pageSize={8}
         rowsPerPageOptions={[5]}
         checkboxSelection

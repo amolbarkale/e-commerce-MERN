@@ -16,15 +16,15 @@
   border: none;
   border-radius: 10px;
 }
-.widgetlgBtn.Approved {
+.widgetlgBtn.approved {
   background: #d3f8ea;
   color: #58b18f;
 }
-.widgetlgBtn.Declined {
+.widgetlgBtn.declined {
   background: #f1cfd2;
   color: #af5f66;
 }
-.widgetlgBtn.Pending {
+.widgetlgBtn.pending {
   background: #cedbf7;
   color: #6984bd;
 }

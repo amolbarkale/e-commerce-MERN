@@ -9,36 +9,49 @@ import NewUser from "./Pages/newUser/NewUser";
 import ProdList from "./Pages/prodList/ProdList";
 import Product from "./Pages/product/Product";
 import NewProd from "./Pages/newProduct/NewProd";
+import Login from "./Pages/login/Login";
 function App() {
+  const admin = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:root")).user
+  ).currentUser.isAdmin;
+
   return (
     <div>
-      <Topbar />
-      <div className="container">
-        <Sidebar />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/users">
-            <UserList />
-          </Route>
-          <Route path="/user/:userId">
-            <User />
-          </Route>
-          <Route path="/newUser">
-            <NewUser />
-          </Route>
-          <Route path="/products">
-            <ProdList />
-          </Route>
-          <Route path="/product/:productId">
-            <Product />
-          </Route>
-          <Route path="/newProduct">
-            <NewProd />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/login">
+          <Login />
+        </Route>
+        {admin && (
+          <>
+            <Topbar />
+            <div className="container">
+              <Sidebar />
+
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/users">
+                <UserList />
+              </Route>
+              <Route path="/user/:userId">
+                <User />
+              </Route>
+              <Route path="/newUser">
+                <NewUser />
+              </Route>
+              <Route path="/products">
+                <ProdList />
+              </Route>
+              <Route path="/product/:productId">
+                <Product />
+              </Route>
+              <Route path="/newProduct">
+                <NewProd />
+              </Route>
+            </div>
+          </>
+        )}
+      </Switch>
     </div>
   );
 }
